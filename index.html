@@ -149,20 +149,16 @@ footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);paddin
 <section aria-labelledby="sec-ext">
   <div class="sec-head">
     <h2 id="sec-ext">외부 리소스</h2>
-    <p>Google Sheets 임베드 · 이미지 · YouTube</p>
+    <p>외부 이미지 2종</p>
   </div>
   <div class="ext">
     <figure>
-      <div class="frame" id="sheetFrame"></div>
-      <figcaption>Google Sheets — 정합성 매트릭스 원본 (파일 → 공유 → 웹에 게시 → 삽입)</figcaption>
+      <a href="https://www.youtube.com/watch?v=uHI5xJaql0I" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/uHI5xJaql0I/hqdefault.jpg" alt="태풍·호우 국민행동요령 영상 썸네일" loading="lazy"></a>
+      <figcaption>[국민행동요령] 몰아치는 태풍호우에 미리 대비하는 행동요령 · <a href="https://www.youtube.com/watch?v=uHI5xJaql0I" target="_blank" rel="noopener">YouTube에서 보기 ↗</a></figcaption>
     </figure>
     <figure>
       <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rainy_day_in_Anyang_-_20211010.jpg?width=960" alt="비 오는 날 안양 도심 거리" loading="lazy">
       <figcaption>사진: <a href="https://commons.wikimedia.org/wiki/File:Rainy_day_in_Anyang_-_20211010.jpg" target="_blank" rel="noopener">Rainy day in Anyang (Wikimedia Commons)</a> · 원 저작자 라이선스 표기 준수</figcaption>
-    </figure>
-    <figure id="ytFigure">
-      <div class="frame" id="ytFrame"></div>
-      <figcaption>행정안전부 공식 유튜브 ‘안전한TV’ — 호우 국민행동요령</figcaption>
     </figure>
   </div>
   <div class="links">
@@ -177,10 +173,6 @@ footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);paddin
 
 <script>
 /* ===== 배포 전 설정 ===== */
-// Google Sheets: 파일 → 공유 → 웹에 게시 → [삽입] 탭에서 나온 iframe의 src 주소를 붙여넣으세요.
-const SHEET_EMBED_URL = "";
-// YouTube: 영상 주소 ...watch?v=XXXXXXXXXXX 의 XXXXXXXXXXX 부분 (비워두면 링크 안내만 표시)
-const YOUTUBE_ID = "";
 
 /* JSON을 못 읽는 환경(로컬 file:// 열기)용 동일 사본 */
 const FALLBACK = [{"번호":"1","부처":"행정안전부","제목":"5월 25일 전국 호우 대응 — 중대본 1단계 가동","본문":"# 5월 25일 전국 호우 대응 — 중대본 1단계 가동\n\n행정안전부(장관 윤호중)는 5월 25일 16:30 부로 중앙재난안전대책본부 1단계를 가동하고 전국 17개 광역지방정부를 대상으로 호우 대비 비상대응 체계를 확립했다.\n\n이번 대응에는 전국적으로 **1,820명**의 공무원·소방·경찰 인력이 동원됐다. 총 투입 예산은 **23억원**으로, 자연재난 대응을 위한 예비비에서 즉시 집행된다.\n\n중앙재난안전대책본부장은 16:30 가동 명령과 함께 17개 광역지방정부에 일제히 현장 점검 지시를 내렸다. 현재까지 잠정 집계된 인명피해는 **2명**으로, 경상자 위주로 경미한 수준이다.\n\n담당 부서: 자연재난대응과 (044-205-5230)\n\n\n---"},{"번호":"2","부처":"기상청","제목":"5월 25일 전국 호우특보 발효 및 대응 동향","본문":"# 5월 25일 전국 호우특보 발효 및 대응 동향\n\n기상청은 5월 25일 11:00부터 전국 17개 광역에 호우주의보를 단계적으로 발효했으며, 행정안전부와 협업해 **16:40** 부로 중앙재난안전대책본부 1단계 가동을 지원했다.\n\n기상청 IT인프라과는 재난문자 발송 자동화 시스템을 통해 행안부와 연계 대응을 진행했다. 본 대응에 동원된 인력은 행정안전부 집계 기준 **1,820명**이며, 행안부·기상청 합동 예산은 **25억원**이 집행됐다.\n\n전국 17개 광역지방정부에 호우주의보가 발효된 가운데, 잠정 인명피해는 **3명**이다.\n\n담당 부서: 기상청 IT인프라과 (02-2181-0700)\n\n\n---"},{"번호":"3","부처":"경찰청","제목":"5월 25일 호우 대응 — 교통통제 현황","본문":"# 5월 25일 호우 대응 — 교통통제 현황\n\n경찰청은 5월 25일 **16:30** 부로 가동된 행정안전부 중대본 1단계에 따라 전국 주요 도로 통제 체계를 가동했다. 통제 범위는 **16개** 광역을 대상으로 했다.\n\n전국 동원 경찰 인력은 **1,800명**이며, 경찰청 자체 예산 **23억원**을 비상 운영비에 즉시 투입했다.\n\n집계된 인명피해는 **3명**으로, 경찰청 119 합동 대응체계가 신속하게 가동된 결과다.\n\n담당 부서: 경찰청 교통안전관리과 (02-3150-2300)"}];
@@ -276,14 +268,6 @@ function renderChips(){
   $("chips").innerHTML = depts.map(d=>`<button type="button" class="chip" aria-pressed="${d===DEPT}" data-d="${esc(d)}">${esc(d)}</button>`).join("");
   $("chips").querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{DEPT=b.dataset.d;renderChips();render();}));
 }
-function renderExternal(){
-  $("sheetFrame").innerHTML = SHEET_EMBED_URL
-    ? `<iframe src="${esc(SHEET_EMBED_URL)}" title="정합성 매트릭스 Google Sheets" loading="lazy"></iframe>`
-    : `<div class="placeholder"><strong>Google Sheets 주소 미설정</strong><span>index.html 상단의 <code>SHEET_EMBED_URL</code>에 ‘웹에 게시’ iframe 주소를 넣으면 이 자리에 시트가 표시됩니다. 함께 드린 <code>정합성_매트릭스.csv</code>를 시트로 가져오면 됩니다.</span></div>`;
-  $("ytFrame").innerHTML = YOUTUBE_ID
-    ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(YOUTUBE_ID)}" title="호우 국민행동요령 영상" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>`
-    : `<div class="placeholder"><strong>YouTube 영상 ID 미설정</strong><span><code>YOUTUBE_ID</code>에 영상 ID를 넣으면 재생기가 표시됩니다. 아래 ‘안전한TV 호우 영상’ 링크에서 고를 수 있습니다.</span></div>`;
-}
 
 async function load(){
   try{
@@ -292,7 +276,7 @@ async function load(){
     ARTICLES = await r.json();
   }catch(e){ ARTICLES = FALLBACK; }
   ARTICLES.forEach(a=>a._facts = extract(a.본문));
-  renderChips(); renderMatrix(); renderExternal(); render();
+  renderChips(); renderMatrix(); render();
 }
 $("q").addEventListener("input",render);
 $("scope").addEventListener("change",render);
